@@ -1,0 +1,21 @@
+//
+//  ContentView.swift
+//  MediTime WatchKit Extension
+//
+//  Created by Samuel Garduño on 17/06/26.
+//  Copyright © 2026 Samuel Garduño. All rights reserved.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        Text("Hello, World!")
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}

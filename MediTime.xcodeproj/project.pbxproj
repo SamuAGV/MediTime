@@ -1,0 +1,574 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B851B17A2FE36753001C262C /* MediTime WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B851B1792FE36753001C262C /* MediTime WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B851B1802FE36753001C262C /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B851B17E2FE36753001C262C /* Interface.storyboard */; };
+		B851B1822FE36755001C262C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B851B1812FE36755001C262C /* Assets.xcassets */; };
+		B851B1892FE36755001C262C /* MediTime WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B851B1882FE36755001C262C /* MediTime WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B851B18E2FE36755001C262C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B851B18D2FE36755001C262C /* ContentView.swift */; };
+		B851B1902FE36755001C262C /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B851B18F2FE36755001C262C /* HostingController.swift */; };
+		B851B1922FE36755001C262C /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B851B1912FE36755001C262C /* ExtensionDelegate.swift */; };
+		B851B1942FE36755001C262C /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B851B1932FE36755001C262C /* NotificationController.swift */; };
+		B851B1962FE36755001C262C /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B851B1952FE36755001C262C /* NotificationView.swift */; };
+		B851B1982FE36755001C262C /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B851B1972FE36755001C262C /* ComplicationController.swift */; };
+		B851B19A2FE36756001C262C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B851B1992FE36756001C262C /* Assets.xcassets */; };
+		B851B19D2FE36756001C262C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B851B19C2FE36756001C262C /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B851B17B2FE36753001C262C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B851B16F2FE36752001C262C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B851B1782FE36753001C262C;
+			remoteInfo = "MediTime WatchKit App";
+		};
+		B851B18A2FE36755001C262C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B851B16F2FE36752001C262C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B851B1872FE36755001C262C;
+			remoteInfo = "MediTime WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B851B1A52FE36756001C262C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B851B1892FE36755001C262C /* MediTime WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B851B1A92FE36756001C262C /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				B851B17A2FE36753001C262C /* MediTime WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B851B1752FE36753001C262C /* MediTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B851B1792FE36753001C262C /* MediTime WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MediTime WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B851B17F2FE36753001C262C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		B851B1812FE36755001C262C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B851B1832FE36755001C262C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B851B1882FE36755001C262C /* MediTime WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MediTime WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B851B18D2FE36755001C262C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B851B18F2FE36755001C262C /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		B851B1912FE36755001C262C /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		B851B1932FE36755001C262C /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		B851B1952FE36755001C262C /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		B851B1972FE36755001C262C /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		B851B1992FE36756001C262C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B851B19C2FE36756001C262C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B851B19E2FE36756001C262C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B851B19F2FE36756001C262C /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B851B1852FE36755001C262C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B851B16E2FE36752001C262C = {
+			isa = PBXGroup;
+			children = (
+				B851B17D2FE36753001C262C /* MediTime WatchKit App */,
+				B851B18C2FE36755001C262C /* MediTime WatchKit Extension */,
+				B851B1762FE36753001C262C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B851B1762FE36753001C262C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B851B1752FE36753001C262C /* MediTime.app */,
+				B851B1792FE36753001C262C /* MediTime WatchKit App.app */,
+				B851B1882FE36755001C262C /* MediTime WatchKit Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B851B17D2FE36753001C262C /* MediTime WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				B851B17E2FE36753001C262C /* Interface.storyboard */,
+				B851B1812FE36755001C262C /* Assets.xcassets */,
+				B851B1832FE36755001C262C /* Info.plist */,
+			);
+			path = "MediTime WatchKit App";
+			sourceTree = "<group>";
+		};
+		B851B18C2FE36755001C262C /* MediTime WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B851B18D2FE36755001C262C /* ContentView.swift */,
+				B851B18F2FE36755001C262C /* HostingController.swift */,
+				B851B1912FE36755001C262C /* ExtensionDelegate.swift */,
+				B851B1932FE36755001C262C /* NotificationController.swift */,
+				B851B1952FE36755001C262C /* NotificationView.swift */,
+				B851B1972FE36755001C262C /* ComplicationController.swift */,
+				B851B1992FE36756001C262C /* Assets.xcassets */,
+				B851B19E2FE36756001C262C /* Info.plist */,
+				B851B19F2FE36756001C262C /* PushNotificationPayload.apns */,
+				B851B19B2FE36756001C262C /* Preview Content */,
+			);
+			path = "MediTime WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		B851B19B2FE36756001C262C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B851B19C2FE36756001C262C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B851B1742FE36752001C262C /* MediTime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B851B1AA2FE36756001C262C /* Build configuration list for PBXNativeTarget "MediTime" */;
+			buildPhases = (
+				B851B1732FE36752001C262C /* Resources */,
+				B851B1A92FE36756001C262C /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B851B17C2FE36753001C262C /* PBXTargetDependency */,
+			);
+			name = MediTime;
+			productName = MediTime;
+			productReference = B851B1752FE36753001C262C /* MediTime.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		B851B1782FE36753001C262C /* MediTime WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B851B1A62FE36756001C262C /* Build configuration list for PBXNativeTarget "MediTime WatchKit App" */;
+			buildPhases = (
+				B851B1772FE36753001C262C /* Resources */,
+				B851B1A52FE36756001C262C /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B851B18B2FE36755001C262C /* PBXTargetDependency */,
+			);
+			name = "MediTime WatchKit App";
+			productName = "MediTime WatchKit App";
+			productReference = B851B1792FE36753001C262C /* MediTime WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		B851B1872FE36755001C262C /* MediTime WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B851B1A22FE36756001C262C /* Build configuration list for PBXNativeTarget "MediTime WatchKit Extension" */;
+			buildPhases = (
+				B851B1842FE36755001C262C /* Sources */,
+				B851B1852FE36755001C262C /* Frameworks */,
+				B851B1862FE36755001C262C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MediTime WatchKit Extension";
+			productName = "MediTime WatchKit Extension";
+			productReference = B851B1882FE36755001C262C /* MediTime WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B851B16F2FE36752001C262C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1170;
+				LastUpgradeCheck = 1170;
+				ORGANIZATIONNAME = "Samuel Garduño";
+				TargetAttributes = {
+					B851B1742FE36752001C262C = {
+						CreatedOnToolsVersion = 11.7;
+					};
+					B851B1782FE36753001C262C = {
+						CreatedOnToolsVersion = 11.7;
+					};
+					B851B1872FE36755001C262C = {
+						CreatedOnToolsVersion = 11.7;
+					};
+				};
+			};
+			buildConfigurationList = B851B1722FE36752001C262C /* Build configuration list for PBXProject "MediTime" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B851B16E2FE36752001C262C;
+			productRefGroup = B851B1762FE36753001C262C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B851B1742FE36752001C262C /* MediTime */,
+				B851B1782FE36753001C262C /* MediTime WatchKit App */,
+				B851B1872FE36755001C262C /* MediTime WatchKit Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B851B1732FE36752001C262C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B851B1772FE36753001C262C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B851B1822FE36755001C262C /* Assets.xcassets in Resources */,
+				B851B1802FE36753001C262C /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B851B1862FE36755001C262C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B851B19D2FE36756001C262C /* Preview Assets.xcassets in Resources */,
+				B851B19A2FE36756001C262C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B851B1842FE36755001C262C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B851B1902FE36755001C262C /* HostingController.swift in Sources */,
+				B851B18E2FE36755001C262C /* ContentView.swift in Sources */,
+				B851B1942FE36755001C262C /* NotificationController.swift in Sources */,
+				B851B1922FE36755001C262C /* ExtensionDelegate.swift in Sources */,
+				B851B1962FE36755001C262C /* NotificationView.swift in Sources */,
+				B851B1982FE36755001C262C /* ComplicationController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B851B17C2FE36753001C262C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B851B1782FE36753001C262C /* MediTime WatchKit App */;
+			targetProxy = B851B17B2FE36753001C262C /* PBXContainerItemProxy */;
+		};
+		B851B18B2FE36755001C262C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B851B1872FE36755001C262C /* MediTime WatchKit Extension */;
+			targetProxy = B851B18A2FE36755001C262C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B851B17E2FE36753001C262C /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B851B17F2FE36753001C262C /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B851B1A02FE36756001C262C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B851B1A12FE36756001C262C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B851B1A32FE36756001C262C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"MediTime WatchKit Extension/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "MediTime WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		B851B1A42FE36756001C262C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"MediTime WatchKit Extension/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "MediTime WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
+		B851B1A72FE36756001C262C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				IBSC_MODULE = MediTime_WatchKit_Extension;
+				INFOPLIST_FILE = "MediTime WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		B851B1A82FE36756001C262C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				IBSC_MODULE = MediTime_WatchKit_Extension;
+				INFOPLIST_FILE = "MediTime WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
+		B851B1AB2FE36756001C262C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B851B1AC2FE36756001C262C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B851B1722FE36752001C262C /* Build configuration list for PBXProject "MediTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B851B1A02FE36756001C262C /* Debug */,
+				B851B1A12FE36756001C262C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B851B1A22FE36756001C262C /* Build configuration list for PBXNativeTarget "MediTime WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B851B1A32FE36756001C262C /* Debug */,
+				B851B1A42FE36756001C262C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B851B1A62FE36756001C262C /* Build configuration list for PBXNativeTarget "MediTime WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B851B1A72FE36756001C262C /* Debug */,
+				B851B1A82FE36756001C262C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B851B1AA2FE36756001C262C /* Build configuration list for PBXNativeTarget "MediTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B851B1AB2FE36756001C262C /* Debug */,
+				B851B1AC2FE36756001C262C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B851B16F2FE36752001C262C /* Project object */;
+}
