@@ -1,103 +1,123 @@
 import SwiftUI
 
-// MARK: - Pantalla Principal
+// MARK: - Pantalla Principal con Navegación por Swipe
 struct ContentView: View {
     @ObservedObject var dataManager = DataManager()
     @State private var currentScreen = 0
+    @State private var dragOffset: CGFloat = 0
+    @State private var isDragging = false
+    
+    // Nombres de las pantallas para la navegación
+    let screens = [
+        "Inicio",
+        "Medicamentos",
+        "Historial",
+        "Estadísticas"
+    ]
+    
+    // Iconos para cada pantalla
+    let icons = [
+        "heart.fill",
+        "pills.fill",
+        "clock.arrow.circlepath",
+        "chart.pie.fill"
+    ]
     
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                // ⚠️ ESPACIO SUPERIOR - Para que la hora no tape el contenido
+                // Espacio superior
                 Spacer()
-                    .frame(height: 8) // Espacio fijo arriba
+                    .frame(height: 8)
                 
-                // Contenido principal
-                ZStack {
-                    if self.currentScreen == 0 {
-                        DashboardView(dataManager: self.dataManager)
-                    } else if self.currentScreen == 1 {
-                        MedicationListView(dataManager: self.dataManager)
-                    } else if self.currentScreen == 2 {
-                        HistoryView(dataManager: self.dataManager)
-                    } else {
-                        StatisticsView(dataManager: self.dataManager)
+                // Indicador de pantalla actual (dots)
+                HStack(spacing: 6) {
+                    ForEach(0..<4, id: \.self) { index in
+                        Circle()
+                            .fill(self.currentScreen == index ? Color.blue : Color.gray.opacity(0.3)) // ✅ CORREGIDO
+                            .frame(width: 6, height: 6)
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.top, 4)
+                .padding(.bottom, 2)
                 
-                // Barra de navegación en la parte inferior
-                HStack(spacing: 0) {
-                    NavButton(
-                        icon: self.currentScreen == 0 ? "house.fill" : "house",
-                        label: "Inicio",
-                        isActive: self.currentScreen == 0,
-                        action: { self.currentScreen = 0 }
-                    )
+                // Contenido con gestos de deslizamiento
+                ZStack {
+                    // Contenido según la pantalla actual
+                    Group {
+                        if self.currentScreen == 0 {
+                            DashboardView(dataManager: self.dataManager)
+                        } else if self.currentScreen == 1 {
+                            MedicationListView(dataManager: self.dataManager)
+                        } else if self.currentScreen == 2 {
+                            HistoryView(dataManager: self.dataManager)
+                        } else {
+                            StatisticsView(dataManager: self.dataManager)
+                        }
+                    }
+                    .offset(x: self.dragOffset)
+                    .animation(.interactiveSpring(), value: self.dragOffset)
                     
-                    NavButton(
-                        icon: self.currentScreen == 1 ? "pills.fill" : "pills",
-                        label: "Medicamentos",
-                        isActive: self.currentScreen == 1,
-                        action: { self.currentScreen = 1 }
-                    )
-                    
-                    NavButton(
-                        icon: self.currentScreen == 2 ? "clock.fill" : "clock",
-                        label: "Historial",
-                        isActive: self.currentScreen == 2,
-                        action: { self.currentScreen = 2 }
-                    )
-                    
-                    NavButton(
-                        icon: self.currentScreen == 3 ? "chart.pie.fill" : "chart.pie",
-                        label: "Stats",
-                        isActive: self.currentScreen == 3,
-                        action: { self.currentScreen = 3 }
-                    )
+                    // Indicadores de deslizamiento en los bordes
+                    HStack {
+                        // Flecha izquierda (si no estamos en la primera pantalla)
+                        if self.currentScreen > 0 {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(Color.blue.opacity(0.5)) // ✅ CORREGIDO
+                                .padding(.leading, 4)
+                        }
+                        
+                        Spacer()
+                        
+                        // Flecha derecha (si no estamos en la última pantalla)
+                        if self.currentScreen < 3 {
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(Color.blue.opacity(0.5)) // ✅ CORREGIDO
+                                .padding(.trailing, 4)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .allowsHitTesting(false) // No interferir con los gestos
                 }
-                .padding(.vertical, 4)
-                .padding(.horizontal, 4)
-                .background(
-                    Color.black.opacity(0.06)
-                        .overlay(
-                            Rectangle()
-                                .frame(height: 0.5)
-                                .foregroundColor(Color.gray.opacity(0.2)),
-                            alignment: .top
-                        )
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            // Solo permitir swipe horizontal
+                            let horizontalAmount = value.translation.width
+                            let verticalAmount = value.translation.height
+                            
+                            // Si el movimiento es más horizontal que vertical
+                            if abs(horizontalAmount) > abs(verticalAmount) {
+                                self.dragOffset = horizontalAmount
+                                self.isDragging = true
+                            }
+                        }
+                        .onEnded { value in
+                            let threshold: CGFloat = 40 // Umbral mínimo para detectar swipe
+                            let horizontalAmount = value.translation.width
+                            
+                            withAnimation(.spring()) {
+                                // Swipe hacia la izquierda (siguiente pantalla)
+                                if horizontalAmount < -threshold && self.currentScreen < 3 {
+                                    self.currentScreen += 1
+                                }
+                                // Swipe hacia la derecha (pantalla anterior)
+                                else if horizontalAmount > threshold && self.currentScreen > 0 {
+                                    self.currentScreen -= 1
+                                }
+                                
+                                // Resetear offset
+                                self.dragOffset = 0
+                                self.isDragging = false
+                            }
+                        }
                 )
-                .frame(height: 40)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
         .edgesIgnoringSafeArea(.all)
-    }
-}
-
-// MARK: - Botón de Navegación
-struct NavButton: View {
-    let icon: String
-    let label: String
-    let isActive: Bool
-    let action: () -> Void
-    
-    var body: some View {
-        Button(action: action) {
-            VStack(spacing: 1) {
-                Image(systemName: icon)
-                    .font(.system(size: 16, weight: isActive ? .bold : .regular))
-                    .foregroundColor(isActive ? .blue : .gray)
-                Text(label)
-                    .font(.system(size: 8, weight: isActive ? .semibold : .regular))
-                    .foregroundColor(isActive ? .blue : Color.gray)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 2)
-        }
-        .buttonStyle(PlainButtonStyle())
     }
 }
 
@@ -125,9 +145,8 @@ struct DashboardView: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack(spacing: 12) {
-                    // ⚠️ ESPACIO SUPERIOR ADICIONAL EN DASHBOARD
                     Spacer()
-                        .frame(height: 18)
+                        .frame(height: 12)
                     
                     // Header - Título
                     HStack {
@@ -169,7 +188,7 @@ struct DashboardView: View {
     }
 }
 
-// MARK: - Tarjeta de Medicamento
+// MARK: - Tarjetas
 struct NextMedicationCardWithData: View {
     let medication: Medication
     

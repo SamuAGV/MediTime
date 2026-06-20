@@ -10,9 +10,8 @@ struct MedicationListView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                // ⚠️ ESPACIO SUPERIOR EN MEDICAMENTOS
                 Spacer()
-                    .frame(height: 18)
+                    .frame(height: 12)
                 
                 // Header
                 HStack {
@@ -39,10 +38,13 @@ struct MedicationListView: View {
                         VStack(spacing: 10) {
                             Image(systemName: "pills")
                                 .font(.system(size: 36))
-                                .foregroundColor(Color.gray.opacity(0.5))
+                                .foregroundColor(Color.gray.opacity(0.5)) // ✅ CORREGIDO
                             Text("Sin medicamentos")
                                 .font(.system(size: 14))
                                 .foregroundColor(.gray)
+                            Text("Desliza a la derecha para volver")
+                                .font(.system(size: 9))
+                                .foregroundColor(Color.gray.opacity(0.6)) // ✅ CORREGIDO
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     } else {
