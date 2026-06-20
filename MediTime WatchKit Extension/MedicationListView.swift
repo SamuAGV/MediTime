@@ -12,7 +12,7 @@ struct MedicationListView: View {
             VStack(spacing: 0) {
                 // ⚠️ ESPACIO SUPERIOR EN MEDICAMENTOS
                 Spacer()
-                    .frame(height: 6)
+                    .frame(height: 18)
                 
                 // Header
                 HStack {

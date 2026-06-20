@@ -31,7 +31,7 @@ struct StatisticsView: View {
                 VStack(spacing: 14) {
                     // Espacio superior
                     Spacer()
-                        .frame(height: 4)
+                        .frame(height: 14)
                     
                     // Título
                     HStack {

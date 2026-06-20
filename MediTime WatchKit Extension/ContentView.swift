@@ -127,7 +127,7 @@ struct DashboardView: View {
                 VStack(spacing: 12) {
                     // ⚠️ ESPACIO SUPERIOR ADICIONAL EN DASHBOARD
                     Spacer()
-                        .frame(height: 4)
+                        .frame(height: 18)
                     
                     // Header - Título
                     HStack {
@@ -160,7 +160,7 @@ struct DashboardView: View {
                     }
                     .padding(.horizontal, 8)
                     
-                    Spacer(minLength: 10)
+                    Spacer(minLength: 12)
                 }
                 .padding(.bottom, 6)
                 .frame(minHeight: geometry.size.height - 60)
