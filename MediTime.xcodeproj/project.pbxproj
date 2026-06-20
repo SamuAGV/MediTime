@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B807924F2FE3C7C70040EFE6 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B807924E2FE3C7C70040EFE6 /* StatisticsView.swift */; };
+		B80792512FE3C7F10040EFE6 /* ReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80792502FE3C7F10040EFE6 /* ReminderView.swift */; };
+		B80792532FE474070040EFE6 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80792522FE474070040EFE6 /* NotificationManager.swift */; };
 		B851B17A2FE36753001C262C /* MediTime WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B851B1792FE36753001C262C /* MediTime WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B851B1802FE36753001C262C /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B851B17E2FE36753001C262C /* Interface.storyboard */; };
 		B851B1822FE36755001C262C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B851B1812FE36755001C262C /* Assets.xcassets */; };
@@ -19,6 +22,11 @@
 		B851B1982FE36755001C262C /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B851B1972FE36755001C262C /* ComplicationController.swift */; };
 		B851B19A2FE36756001C262C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B851B1992FE36756001C262C /* Assets.xcassets */; };
 		B851B19D2FE36756001C262C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B851B19C2FE36756001C262C /* Preview Assets.xcassets */; };
+		B87D7D272FE39F560053FF18 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D7D262FE39F560053FF18 /* Models.swift */; };
+		B87D7D292FE39F770053FF18 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D7D282FE39F770053FF18 /* DataManager.swift */; };
+		B87D7D2B2FE39F9A0053FF18 /* MedicationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D7D2A2FE39F9A0053FF18 /* MedicationListView.swift */; };
+		B87D7D2E2FE39FFE0053FF18 /* AddEditMedicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D7D2D2FE39FFE0053FF18 /* AddEditMedicationView.swift */; };
+		B87D7D302FE3A01C0053FF18 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D7D2F2FE3A01C0053FF18 /* HistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +72,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B807924E2FE3C7C70040EFE6 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		B80792502FE3C7F10040EFE6 /* ReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderView.swift; sourceTree = "<group>"; };
+		B80792522FE474070040EFE6 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		B851B1752FE36753001C262C /* MediTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B851B1792FE36753001C262C /* MediTime WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MediTime WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B851B17F2FE36753001C262C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -80,6 +91,11 @@
 		B851B19C2FE36756001C262C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B851B19E2FE36756001C262C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B851B19F2FE36756001C262C /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		B87D7D262FE39F560053FF18 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B87D7D282FE39F770053FF18 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		B87D7D2A2FE39F9A0053FF18 /* MedicationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationListView.swift; sourceTree = "<group>"; };
+		B87D7D2D2FE39FFE0053FF18 /* AddEditMedicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditMedicationView.swift; sourceTree = "<group>"; };
+		B87D7D2F2FE3A01C0053FF18 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +141,7 @@
 		B851B18C2FE36755001C262C /* MediTime WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				B87D7D252FE39F2E0053FF18 /* Screens */,
 				B851B18D2FE36755001C262C /* ContentView.swift */,
 				B851B18F2FE36755001C262C /* HostingController.swift */,
 				B851B1912FE36755001C262C /* ExtensionDelegate.swift */,
@@ -135,6 +152,14 @@
 				B851B19E2FE36756001C262C /* Info.plist */,
 				B851B19F2FE36756001C262C /* PushNotificationPayload.apns */,
 				B851B19B2FE36756001C262C /* Preview Content */,
+				B87D7D262FE39F560053FF18 /* Models.swift */,
+				B87D7D282FE39F770053FF18 /* DataManager.swift */,
+				B87D7D2F2FE3A01C0053FF18 /* HistoryView.swift */,
+				B87D7D2A2FE39F9A0053FF18 /* MedicationListView.swift */,
+				B87D7D2D2FE39FFE0053FF18 /* AddEditMedicationView.swift */,
+				B807924E2FE3C7C70040EFE6 /* StatisticsView.swift */,
+				B80792502FE3C7F10040EFE6 /* ReminderView.swift */,
+				B80792522FE474070040EFE6 /* NotificationManager.swift */,
 			);
 			path = "MediTime WatchKit Extension";
 			sourceTree = "<group>";
@@ -145,6 +170,13 @@
 				B851B19C2FE36756001C262C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B87D7D252FE39F2E0053FF18 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,11 +308,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				B851B1902FE36755001C262C /* HostingController.swift in Sources */,
+				B807924F2FE3C7C70040EFE6 /* StatisticsView.swift in Sources */,
+				B87D7D292FE39F770053FF18 /* DataManager.swift in Sources */,
 				B851B18E2FE36755001C262C /* ContentView.swift in Sources */,
+				B80792532FE474070040EFE6 /* NotificationManager.swift in Sources */,
 				B851B1942FE36755001C262C /* NotificationController.swift in Sources */,
 				B851B1922FE36755001C262C /* ExtensionDelegate.swift in Sources */,
+				B80792512FE3C7F10040EFE6 /* ReminderView.swift in Sources */,
+				B87D7D302FE3A01C0053FF18 /* HistoryView.swift in Sources */,
+				B87D7D2E2FE39FFE0053FF18 /* AddEditMedicationView.swift in Sources */,
+				B87D7D2B2FE39F9A0053FF18 /* MedicationListView.swift in Sources */,
 				B851B1962FE36755001C262C /* NotificationView.swift in Sources */,
 				B851B1982FE36755001C262C /* ComplicationController.swift in Sources */,
+				B87D7D272FE39F560053FF18 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,8 +467,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"MediTime WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "MediTime WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -436,8 +477,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.watchkitapp;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -450,8 +492,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"MediTime WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "MediTime WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -459,8 +502,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.watchkitapp;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -474,11 +518,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = MediTime_WatchKit_Extension;
 				INFOPLIST_FILE = "MediTime WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -492,11 +538,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = MediTime_WatchKit_Extension;
 				INFOPLIST_FILE = "MediTime WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -508,11 +556,13 @@
 		B851B1AB2FE36756001C262C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -520,11 +570,13 @@
 		B851B1AC2FE36756001C262C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime.MediTime;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samuel.meditime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
