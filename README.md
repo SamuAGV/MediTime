@@ -203,15 +203,6 @@ Este proyecto está bajo la Licencia MIT.
 
 ---
 
-## ‍ Autor
-
-**Samuel Garduño**
-
-**Ana Colin**
-
-**Brenda Gutierrez**
----
-
 ##  Contacto
 
 Si tienes preguntas o sugerencias, no dudes en abrir un issue en el repositorio.
