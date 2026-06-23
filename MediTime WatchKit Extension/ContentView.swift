@@ -95,7 +95,7 @@ struct ContentView: View {
     }
 }
 
-// MARK: - 🏠 DASHBOARD REDISEÑADO
+// MARK: - DASHBOARD
 struct DashboardView: View {
     @ObservedObject var dataManager: DataManager
     
@@ -201,9 +201,9 @@ struct DashboardView: View {
                             .font(.system(size: 10))
                             .foregroundColor(.gray)
                         
-                        Text(adherenceRate >= 80 ? "🌟 ¡Excelente!" :
-                             adherenceRate >= 50 ? "💪 Vas bien" :
-                             "⚠️ Necesitas mejorar")
+                        Text(adherenceRate >= 80 ? "¡Excelente!" :
+                             adherenceRate >= 50 ? "Vas bien" :
+                             "Necesitas mejorar")
                             .font(.system(size: 12, weight: .semibold))
                             .foregroundColor(
                                 adherenceRate >= 80 ? Color.green :

@@ -1,7 +1,7 @@
 import SwiftUI
 
 // Enum para controlar qué sheet mostrar
-enum ActiveSheet: Identifiable {
+enum SheetType: Identifiable {
     case add
     case options(Medication)
     
@@ -20,7 +20,8 @@ struct MedicationListView: View {
     @State private var takenMessage = ""
     @State private var takenTitle = ""
     
-    @State private var activeSheet: ActiveSheet?
+    // UN SOLO STATE para controlar el sheet
+    @State private var activeSheet: SheetType?
     
     var body: some View {
         GeometryReader { geometry in
@@ -89,6 +90,7 @@ struct MedicationListView: View {
                         List {
                             ForEach(self.dataManager.medications) { medication in
                                 Button(action: {
+                                    print("🟡 Medicamento seleccionado: \(medication.name)")
                                     self.activeSheet = .options(medication)
                                 }) {
                                     MedicationRow(medication: medication)
@@ -104,8 +106,10 @@ struct MedicationListView: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
-        // ⚠️ SHEET CON FUNCIÓN SEPARADA
-        .sheet(item: $activeSheet, content: sheetContent)
+        // ⚠️ SHEET - Usando una función separada para evitar switch en ViewBuilder
+        .sheet(item: $activeSheet) { sheet in
+            self.sheetContent(for: sheet)
+        }
         .alert(isPresented: $showingTakenAlert) {
             Alert(
                 title: Text(self.takenTitle),
@@ -117,46 +121,48 @@ struct MedicationListView: View {
         }
     }
     
-    // ⚠️ FUNCIÓN SEPARADA PARA CONSTRUIR EL SHEET - EVITA ViewBuilder
-    @ViewBuilder
-    func sheetContent(for sheet: ActiveSheet) -> some View {
+    // ⚠️ FUNCIÓN SEPARADA - Evita el switch en el ViewBuilder
+    func sheetContent(for sheet: SheetType) -> some View {
         if sheet.id == 0 {
-            AddEditMedicationView(dataManager: self.dataManager, medication: nil)
+            // Caso .add
+            return AnyView(AddEditMedicationView(dataManager: self.dataManager, medication: nil))
         } else {
-            // Extraer el medicamento del enum
+            // Caso .options
             if case .options(let medication) = sheet {
-                OptionsSheetView(
-                    medication: medication,
-                    onTake: {
-                        self.registerLog(medication, status: .taken, message: "✅ Has registrado la toma de \(medication.name)")
-                        self.activeSheet = nil
-                    },
-                    onSnooze: {
-                        self.registerLog(medication, status: .snoozed, message: "⏰ Has pospuesto \(medication.name) (10 min)")
-                        self.activeSheet = nil
-                    },
-                    onMiss: {
-                        self.registerLog(medication, status: .missed, message: "❌ Has omitido \(medication.name)")
-                        self.activeSheet = nil
-                    },
-                    onEdit: {
-                        self.activeSheet = nil
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            self.selectedMedication = medication
-                            self.activeSheet = .add
+                return AnyView(
+                    OptionsSheetView(
+                        medication: medication,
+                        onTake: {
+                            self.registerLog(medication, status: .taken, message: "Has registrado la toma de \(medication.name)")
+                            self.activeSheet = nil
+                        },
+                        onSnooze: {
+                            self.registerLog(medication, status: .snoozed, message: "Has pospuesto \(medication.name) (10 min)")
+                            self.activeSheet = nil
+                        },
+                        onMiss: {
+                            self.registerLog(medication, status: .missed, message: "Has omitido \(medication.name)")
+                            self.activeSheet = nil
+                        },
+                        onEdit: {
+                            self.activeSheet = nil
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                self.selectedMedication = medication
+                                self.activeSheet = .add
+                            }
+                        },
+                        onDelete: {
+                            print("🗑️ Eliminando: \(medication.name)")
+                            self.dataManager.deleteMedication(medication)
+                            self.activeSheet = nil
+                        },
+                        onCancel: {
+                            self.activeSheet = nil
                         }
-                    },
-                    onDelete: {
-                        print("🗑️ Eliminando: \(medication.name)")
-                        self.dataManager.deleteMedication(medication)
-                        self.activeSheet = nil
-                    },
-                    onCancel: {
-                        self.activeSheet = nil
-                    }
+                    )
                 )
             } else {
-                EmptyView()
+                return AnyView(EmptyView())
             }
         }
     }
@@ -171,8 +177,8 @@ struct MedicationListView: View {
         self.dataManager.logs.append(log)
         self.dataManager.saveData()
         
-        self.takenTitle = status == .taken ? "✅ Registrado" :
-                          status == .snoozed ? "⏰ Pospuesto" : "❌ Omitido"
+        self.takenTitle = status == .taken ? "Registrado" :
+                          status == .snoozed ? "Pospuesto" : "Omitido"
         self.takenMessage = message
         self.showingTakenAlert = true
     }
@@ -210,7 +216,7 @@ struct OptionsSheetView: View {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
                             .font(.system(size: 18))
-                        Text("✅ Tomar ahora")
+                        Text("Tomar ahora")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
                         Spacer()
@@ -232,7 +238,7 @@ struct OptionsSheetView: View {
                         Image(systemName: "clock.fill")
                             .foregroundColor(.orange)
                             .font(.system(size: 18))
-                        Text("⏰ Pospuesto (10 min)")
+                        Text("Pospuesto (10 min)")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
                         Spacer()
@@ -254,7 +260,7 @@ struct OptionsSheetView: View {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.red)
                             .font(.system(size: 18))
-                        Text("❌ Omitir")
+                        Text("Omitir")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
                         Spacer()
@@ -280,7 +286,7 @@ struct OptionsSheetView: View {
                         Image(systemName: "pencil")
                             .foregroundColor(.blue)
                             .font(.system(size: 16))
-                        Text("✏️ Editar")
+                        Text("Editar")
                             .font(.system(size: 15, weight: .medium))
                             .foregroundColor(.white)
                         Spacer()
@@ -298,7 +304,7 @@ struct OptionsSheetView: View {
                         Image(systemName: "trash")
                             .foregroundColor(.red)
                             .font(.system(size: 16))
-                        Text("🗑️ Eliminar")
+                        Text("Eliminar")
                             .font(.system(size: 15, weight: .medium))
                             .foregroundColor(.red)
                         Spacer()
