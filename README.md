@@ -8,7 +8,7 @@ MediTime es una aplicación nativa para **Apple Watch** desarrollada con **Swift
 
 ---
 
-## ✨ Características Principales
+## Características Principales
 
 - **Panel de Control** con resumen diario de medicamentos
 - **Gestión completa de medicamentos** (Crear, Leer, Actualizar, Eliminar)
@@ -206,7 +206,9 @@ Este proyecto está bajo la Licencia MIT.
 ## ‍ Autor
 
 **Samuel Garduño**
+
 **Ana Colin**
+
 **Brenda Gutierrez**
 ---
 
