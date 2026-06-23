@@ -13,6 +13,8 @@ struct AddEditMedicationView: View {
     @State private var showingTimePicker = false
     @State private var selectedTimeIndex = 0
     @State private var selectedDays: [Bool] = [true, true, true, true, true, true, true]
+    @State private var showSaveError = false
+    @State private var errorMessage = ""
     
     let daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"]
     let units = ["mg", "g", "ml", "UI", "gotas"]
@@ -43,6 +45,17 @@ struct AddEditMedicationView: View {
                     Text(self.medication == nil ? "➕ Nuevo" : "✏️ Editar")
                         .font(.system(size: 16, weight: .bold))
                         .padding(.top, 6)
+                    
+                    // Mensaje de error si ocurre
+                    if self.showSaveError {
+                        Text("❌ \(self.errorMessage)")
+                            .font(.system(size: 10))
+                            .foregroundColor(.red)
+                            .padding(6)
+                            .background(Color.red.opacity(0.1))
+                            .cornerRadius(6)
+                            .padding(.horizontal, 8)
+                    }
                     
                     // Campos del formulario
                     VStack(spacing: 8) {
@@ -99,7 +112,7 @@ struct AddEditMedicationView: View {
                                             .font(.system(size: 10, weight: self.selectedDays[index] ? .bold : .regular))
                                             .frame(width: 24, height: 24)
                                             .background(self.selectedDays[index] ? Color.blue : Color.gray.opacity(0.2))
-                                            .foregroundColor(self.selectedDays[index] ? .white : .gray)
+                                            .foregroundColor(self.selectedDays[index] ? Color.white : Color.gray)
                                             .cornerRadius(12)
                                     }
                                     .buttonStyle(PlainButtonStyle())
@@ -200,24 +213,72 @@ struct AddEditMedicationView: View {
         }
     }
     
+    // MARK: - Función Guardar MEJORADA con logs
     func saveMedication() {
+        print("🟢 AddEditMedicationView: Iniciando guardado...")
+        
+        // Validar datos
+        guard !self.name.isEmpty else {
+            self.showError("El nombre es obligatorio")
+            return
+        }
+        
+        guard !self.dosage.isEmpty else {
+            self.showError("La dosis es obligatoria")
+            return
+        }
+        
+        guard !self.times.isEmpty else {
+            self.showError("Debes agregar al menos un horario")
+            return
+        }
+        
+        // Crear el medicamento
         let newMedication = Medication(
             id: self.medication?.id ?? UUID(),
-            name: self.name,
-            dosage: self.dosage,
+            name: self.name.trimmingCharacters(in: .whitespaces),
+            dosage: self.dosage.trimmingCharacters(in: .whitespaces),
             unit: self.unit,
             times: self.times,
             selectedDays: self.selectedDays,
             isActive: true
         )
         
+        print("📝 AddEditMedicationView: Medicamento creado:")
+        print("   - ID: \(newMedication.id)")
+        print("   - Nombre: \(newMedication.name)")
+        print("   - Dosis: \(newMedication.dosage) \(newMedication.unit)")
+        print("   - Horarios: \(newMedication.times.count)")
+        print("   - Días: \(newMedication.selectedDays ?? [])")
+        
+        // Guardar
         if self.medication != nil {
+            print("✏️ AddEditMedicationView: Actualizando medicamento existente")
             self.dataManager.updateMedication(newMedication)
         } else {
+            print("➕ AddEditMedicationView: Agregando nuevo medicamento")
             self.dataManager.addMedication(newMedication)
         }
         
-        self.presentationMode.wrappedValue.dismiss()
+        // Verificar que se guardó
+        let saved = self.dataManager.medications.contains { $0.id == newMedication.id }
+        if saved {
+            print("✅ AddEditMedicationView: Medicamento guardado exitosamente")
+            self.presentationMode.wrappedValue.dismiss()
+        } else {
+            print("❌ AddEditMedicationView: Error al guardar el medicamento")
+            self.showError("Error al guardar. Intenta de nuevo.")
+        }
+    }
+    
+    func showError(_ message: String) {
+        self.errorMessage = message
+        self.showSaveError = true
+        
+        // Ocultar el error después de 3 segundos
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.showSaveError = false  // ✅ CORREGIDO - con self.
+        }
     }
     
     func formatTime(_ date: Date) -> String {
@@ -227,7 +288,7 @@ struct AddEditMedicationView: View {
     }
 }
 
-// MARK: - Time Picker optimizado para Watch
+// MARK: - Time Picker
 struct TimePickerView: View {
     @Binding var times: [Date]
     let index: Int
