@@ -1,16 +1,26 @@
 import SwiftUI
 
+// Enum para controlar qué sheet mostrar
+enum ActiveSheet: Identifiable {
+    case add
+    case options(Medication)
+    
+    var id: Int {
+        switch self {
+        case .add: return 0
+        case .options: return 1
+        }
+    }
+}
+
 struct MedicationListView: View {
     @ObservedObject var dataManager: DataManager
-    @State private var showingAddSheet = false
     @State private var selectedMedication: Medication?
     @State private var showingTakenAlert = false
     @State private var takenMessage = ""
     @State private var takenTitle = ""
     
-    // Sheet personalizado
-    @State private var showingOptionsSheet = false
-    @State private var selectedMedicationForAction: Medication?
+    @State private var activeSheet: ActiveSheet?
     
     var body: some View {
         GeometryReader { geometry in
@@ -32,8 +42,8 @@ struct MedicationListView: View {
                     .padding(.horizontal, 12)
                     
                     Button(action: {
-                        self.selectedMedication = nil
-                        self.showingAddSheet = true
+                        print("🟢 Botón Agregar presionado")
+                        self.activeSheet = .add
                     }) {
                         HStack {
                             Spacer()
@@ -79,8 +89,7 @@ struct MedicationListView: View {
                         List {
                             ForEach(self.dataManager.medications) { medication in
                                 Button(action: {
-                                    self.selectedMedicationForAction = medication
-                                    self.showingOptionsSheet = true
+                                    self.activeSheet = .options(medication)
                                 }) {
                                     MedicationRow(medication: medication)
                                 }
@@ -95,60 +104,60 @@ struct MedicationListView: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
-        .sheet(isPresented: $showingAddSheet) {
-            AddEditMedicationView(dataManager: self.dataManager,
-                                medication: self.selectedMedication)
-        }
-        // ⚠️ SHEET PERSONALIZADO CON SCROLL
-        .sheet(isPresented: $showingOptionsSheet) {
-            OptionsSheetView(
-                medication: self.selectedMedicationForAction,
-                onTake: {
-                    if let med = self.selectedMedicationForAction {
-                        self.registerLog(med, status: .taken, message: "Has registrado la toma de \(med.name)")
-                    }
-                    self.showingOptionsSheet = false
-                },
-                onSnooze: {
-                    if let med = self.selectedMedicationForAction {
-                        self.registerLog(med, status: .snoozed, message: "Has pospuesto \(med.name) (10 min)")
-                    }
-                    self.showingOptionsSheet = false
-                },
-                onMiss: {
-                    if let med = self.selectedMedicationForAction {
-                        self.registerLog(med, status: .missed, message: "Has omitido \(med.name)")
-                    }
-                    self.showingOptionsSheet = false
-                },
-                onEdit: {
-                    self.selectedMedication = self.selectedMedicationForAction
-                    self.selectedMedicationForAction = nil
-                    self.showingOptionsSheet = false
-                    self.showingAddSheet = true
-                },
-                onDelete: {
-                    if let med = self.selectedMedicationForAction {
-                        print("Eliminando: \(med.name)")
-                        self.dataManager.deleteMedication(med)
-                        self.selectedMedicationForAction = nil
-                    }
-                    self.showingOptionsSheet = false
-                },
-                onCancel: {
-                    self.selectedMedicationForAction = nil
-                    self.showingOptionsSheet = false
-                }
-            )
-        }
+        // ⚠️ SHEET CON FUNCIÓN SEPARADA
+        .sheet(item: $activeSheet, content: sheetContent)
         .alert(isPresented: $showingTakenAlert) {
             Alert(
                 title: Text(self.takenTitle),
                 message: Text(self.takenMessage),
                 dismissButton: .default(Text("OK")) {
-                    self.selectedMedicationForAction = nil
+                    self.activeSheet = nil
                 }
             )
+        }
+    }
+    
+    // ⚠️ FUNCIÓN SEPARADA PARA CONSTRUIR EL SHEET - EVITA ViewBuilder
+    @ViewBuilder
+    func sheetContent(for sheet: ActiveSheet) -> some View {
+        if sheet.id == 0 {
+            AddEditMedicationView(dataManager: self.dataManager, medication: nil)
+        } else {
+            // Extraer el medicamento del enum
+            if case .options(let medication) = sheet {
+                OptionsSheetView(
+                    medication: medication,
+                    onTake: {
+                        self.registerLog(medication, status: .taken, message: "✅ Has registrado la toma de \(medication.name)")
+                        self.activeSheet = nil
+                    },
+                    onSnooze: {
+                        self.registerLog(medication, status: .snoozed, message: "⏰ Has pospuesto \(medication.name) (10 min)")
+                        self.activeSheet = nil
+                    },
+                    onMiss: {
+                        self.registerLog(medication, status: .missed, message: "❌ Has omitido \(medication.name)")
+                        self.activeSheet = nil
+                    },
+                    onEdit: {
+                        self.activeSheet = nil
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.selectedMedication = medication
+                            self.activeSheet = .add
+                        }
+                    },
+                    onDelete: {
+                        print("🗑️ Eliminando: \(medication.name)")
+                        self.dataManager.deleteMedication(medication)
+                        self.activeSheet = nil
+                    },
+                    onCancel: {
+                        self.activeSheet = nil
+                    }
+                )
+            } else {
+                EmptyView()
+            }
         }
     }
     
@@ -162,17 +171,16 @@ struct MedicationListView: View {
         self.dataManager.logs.append(log)
         self.dataManager.saveData()
         
-        self.takenTitle = status == .taken ? "Registrado" :
-                          status == .snoozed ? "Pospuesto" : "Omitido"
+        self.takenTitle = status == .taken ? "✅ Registrado" :
+                          status == .snoozed ? "⏰ Pospuesto" : "❌ Omitido"
         self.takenMessage = message
         self.showingTakenAlert = true
-        self.selectedMedicationForAction = nil
     }
 }
 
-// MARK: - Sheet Personalizado CON SCROLL
+// MARK: - Sheet Personalizado con 3 Opciones de Estado
 struct OptionsSheetView: View {
-    let medication: Medication?
+    let medication: Medication
     let onTake: () -> Void
     let onSnooze: () -> Void
     let onMiss: () -> Void
@@ -181,11 +189,9 @@ struct OptionsSheetView: View {
     let onCancel: () -> Void
     
     var body: some View {
-        // ⚠️ AGREGAR SCROLLVIEW PARA DESPLAZAR
         ScrollView {
             VStack(spacing: 14) {
-                // Título
-                Text(medication?.name ?? "Medicamento")
+                Text(medication.name)
                     .font(.system(size: 18, weight: .bold))
                     .foregroundColor(.white)
                     .padding(.top, 20)
@@ -198,15 +204,13 @@ struct OptionsSheetView: View {
                     .background(Color.gray.opacity(0.3))
                     .padding(.horizontal, 20)
                 
-                // ⚠️ 3 OPCIONES DE ESTADO
-                
-                // 1. Tomar ahora (Verde)
+                // Tomar ahora (Verde)
                 Button(action: onTake) {
                     HStack {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
                             .font(.system(size: 18))
-                        Text("Tomar ahora")
+                        Text("✅ Tomar ahora")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
                         Spacer()
@@ -222,13 +226,13 @@ struct OptionsSheetView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 
-                // 2. Pospuesto (Naranja)
+                // Pospuesto (Naranja)
                 Button(action: onSnooze) {
                     HStack {
                         Image(systemName: "clock.fill")
                             .foregroundColor(.orange)
                             .font(.system(size: 18))
-                        Text("Pospuesto (10 min)")
+                        Text("⏰ Pospuesto (10 min)")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
                         Spacer()
@@ -244,13 +248,13 @@ struct OptionsSheetView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 
-                // 3. Omitido (Rojo)
+                // Omitido (Rojo)
                 Button(action: onMiss) {
                     HStack {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.red)
                             .font(.system(size: 18))
-                        Text("Omitir")
+                        Text("❌ Omitir")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
                         Spacer()
@@ -270,13 +274,13 @@ struct OptionsSheetView: View {
                     .background(Color.gray.opacity(0.3))
                     .padding(.horizontal, 20)
                 
-                // 4. Editar (Azul)
+                // Editar (Azul)
                 Button(action: onEdit) {
                     HStack {
                         Image(systemName: "pencil")
                             .foregroundColor(.blue)
                             .font(.system(size: 16))
-                        Text("Editar")
+                        Text("✏️ Editar")
                             .font(.system(size: 15, weight: .medium))
                             .foregroundColor(.white)
                         Spacer()
@@ -288,13 +292,13 @@ struct OptionsSheetView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 
-                // 5. Eliminar (Rojo oscuro)
+                // Eliminar (Rojo oscuro)
                 Button(action: onDelete) {
                     HStack {
                         Image(systemName: "trash")
                             .foregroundColor(.red)
                             .font(.system(size: 16))
-                        Text("Eliminar")
+                        Text("🗑️ Eliminar")
                             .font(.system(size: 15, weight: .medium))
                             .foregroundColor(.red)
                         Spacer()
@@ -310,7 +314,7 @@ struct OptionsSheetView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 
-                // 6. Cancelar
+                // Cancelar
                 Button(action: onCancel) {
                     Text("Cancelar")
                         .font(.system(size: 14))

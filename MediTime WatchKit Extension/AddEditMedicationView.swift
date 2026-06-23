@@ -44,6 +44,7 @@ struct AddEditMedicationView: View {
                     // Título
                     Text(self.medication == nil ? "➕ Nuevo" : "✏️ Editar")
                         .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
                         .padding(.top, 6)
                     
                     // Mensaje de error si ocurre
@@ -52,7 +53,7 @@ struct AddEditMedicationView: View {
                             .font(.system(size: 10))
                             .foregroundColor(.red)
                             .padding(6)
-                            .background(Color.red.opacity(0.1))
+                            .background(Color.red.opacity(0.15))
                             .cornerRadius(6)
                             .padding(.horizontal, 8)
                     }
@@ -67,9 +68,10 @@ struct AddEditMedicationView: View {
                             TextField("Ej: Paracetamol", text: self.$name)
                                 .textFieldStyle(PlainTextFieldStyle())
                                 .padding(6)
-                                .background(Color.gray.opacity(0.12))
+                                .background(Color.gray.opacity(0.15))
                                 .cornerRadius(6)
                                 .font(.system(size: 13))
+                                .foregroundColor(.white)
                         }
                         
                         // Dosis
@@ -81,14 +83,16 @@ struct AddEditMedicationView: View {
                                 TextField("Cantidad", text: self.$dosage)
                                     .textFieldStyle(PlainTextFieldStyle())
                                     .padding(6)
-                                    .background(Color.gray.opacity(0.12))
+                                    .background(Color.gray.opacity(0.15))
                                     .cornerRadius(6)
                                     .font(.system(size: 13))
+                                    .foregroundColor(.white)
                                     .frame(width: 70)
                                 
                                 Picker("Unidad", selection: self.$unit) {
                                     ForEach(self.units, id: \.self) { unit in
                                         Text(unit).tag(unit)
+                                            .foregroundColor(.white)
                                     }
                                 }
                                 .frame(width: 50)
@@ -130,6 +134,7 @@ struct AddEditMedicationView: View {
                                 HStack {
                                     Text("Hora \(index + 1):")
                                         .font(.system(size: 10))
+                                        .foregroundColor(.gray)
                                     Spacer()
                                     Text(self.formatTime(self.times[index]))
                                         .font(.system(size: 13, weight: .medium))
@@ -207,17 +212,17 @@ struct AddEditMedicationView: View {
                 .frame(minHeight: geometry.size.height)
                 .padding(.horizontal, 4)
             }
+            .background(Color.black.opacity(0.95))
         }
         .sheet(isPresented: self.$showingTimePicker) {
             TimePickerView(times: self.$times, index: self.selectedTimeIndex)
         }
     }
     
-    // MARK: - Función Guardar MEJORADA con logs
+    // MARK: - Función Guardar
     func saveMedication() {
         print("🟢 AddEditMedicationView: Iniciando guardado...")
         
-        // Validar datos
         guard !self.name.isEmpty else {
             self.showError("El nombre es obligatorio")
             return
@@ -233,7 +238,6 @@ struct AddEditMedicationView: View {
             return
         }
         
-        // Crear el medicamento
         let newMedication = Medication(
             id: self.medication?.id ?? UUID(),
             name: self.name.trimmingCharacters(in: .whitespaces),
@@ -244,29 +248,17 @@ struct AddEditMedicationView: View {
             isActive: true
         )
         
-        print("📝 AddEditMedicationView: Medicamento creado:")
-        print("   - ID: \(newMedication.id)")
-        print("   - Nombre: \(newMedication.name)")
-        print("   - Dosis: \(newMedication.dosage) \(newMedication.unit)")
-        print("   - Horarios: \(newMedication.times.count)")
-        print("   - Días: \(newMedication.selectedDays ?? [])")
-        
-        // Guardar
         if self.medication != nil {
-            print("✏️ AddEditMedicationView: Actualizando medicamento existente")
             self.dataManager.updateMedication(newMedication)
         } else {
-            print("➕ AddEditMedicationView: Agregando nuevo medicamento")
             self.dataManager.addMedication(newMedication)
         }
         
-        // Verificar que se guardó
         let saved = self.dataManager.medications.contains { $0.id == newMedication.id }
         if saved {
-            print("✅ AddEditMedicationView: Medicamento guardado exitosamente")
+            print("✅ Medicamento guardado exitosamente")
             self.presentationMode.wrappedValue.dismiss()
         } else {
-            print("❌ AddEditMedicationView: Error al guardar el medicamento")
             self.showError("Error al guardar. Intenta de nuevo.")
         }
     }
@@ -274,10 +266,8 @@ struct AddEditMedicationView: View {
     func showError(_ message: String) {
         self.errorMessage = message
         self.showSaveError = true
-        
-        // Ocultar el error después de 3 segundos
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.showSaveError = false  // ✅ CORREGIDO - con self.
+            self.showSaveError = false
         }
     }
     
@@ -310,12 +300,14 @@ struct TimePickerView: View {
         VStack(spacing: 12) {
             Text("Seleccionar Hora")
                 .font(.system(size: 14, weight: .bold))
+                .foregroundColor(.white)
                 .padding(.top, 8)
             
             HStack {
                 Picker("Hora", selection: self.$selectedHour) {
                     ForEach(0..<24, id: \.self) { hour in
                         Text("\(hour)").tag(hour)
+                            .foregroundColor(.white)
                     }
                 }
                 .frame(width: 50)
@@ -324,10 +316,12 @@ struct TimePickerView: View {
                 
                 Text(":")
                     .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(.white)
                 
                 Picker("Minuto", selection: self.$selectedMinute) {
                     ForEach(0..<60, id: \.self) { minute in
                         Text(String(format: "%02d", minute)).tag(minute)
+                            .foregroundColor(.white)
                     }
                 }
                 .frame(width: 50)
@@ -359,7 +353,7 @@ struct TimePickerView: View {
             .padding(.bottom, 8)
         }
         .padding()
-        .background(Color.black.opacity(0.05))
+        .background(Color.black.opacity(0.95))
         .cornerRadius(12)
     }
 }
